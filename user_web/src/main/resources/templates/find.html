@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>找回密码</h1>
+
+<form>
+    <div>
+        <label>用户名</label>
+        <input type="text"  id="username" placeholder="请输入用户名">
+    </div>
+    <div>
+        <label>新密码</label>
+        <input type="text" id="password" placeholder="请输入用户名称">
+    </div>
+    <button type="button" onclick="update()">修改密码</button>
+</form>
+<script src="/jquery/jquery-2.1.1.min.js"></script>
+<script type="text/javascript">
+
+    function update(){
+        $.ajax({
+            type: "GET",
+            url: "/user/update",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data:
+                {
+                    "username":$("#username").val(),
+                    "password":$("#password").val()
+                }
+
+            ,
+            success: function (message) {
+                if(message !=null){
+                    window.location.href="/user/tologin";
+                }else{
+                    alert("修改失败");
+                }
+            }
+        });
+    }
+
+    function find(){
+        $.ajax({
+            type: "GET",
+            url: "/user/fond",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data:
+                {
+                    "username":$("#username").val()
+                }
+
+            ,
+            success: function (message) {
+                if(message !=null){
+                    window.location.href="/user/tofind";
+                }else{
+                    alert("登录失败");
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>
